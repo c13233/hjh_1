@@ -4,7 +4,6 @@ class HomeController < ApplicationController
   
   def list
       @list_country = request.location.country
-      
       temp = params[:button]
       if params[:search]
         @every_post = Post.search(params[:search]).where(country: request.location.country).order("id desc").paginate(:page => params[:page])
@@ -15,6 +14,7 @@ class HomeController < ApplicationController
           @every_post = Post.where(country: request.location.country).where(filter: "0").order("id desc").paginate(:page => params[:page])   
         end
       end
+
   end
   def count
     @every_post = Post.find(params[:id])
