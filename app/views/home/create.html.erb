@@ -1,0 +1,79 @@
+<div class="subpage">
+
+	<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<a href="/home/index" class="logo">Ge<strong>O</strong>talk</a>
+				<nav id="nav">
+					<a href="/home/index">Home</a>
+					<a href="/home/list">글목록</a>
+					<a href="/home/create">글쓰기</a>
+				</nav>
+				<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+			</div>
+		</header>
+
+	<!-- Main -->
+		<section id="main" class="wrapper">
+			<div class="inner">
+				<header class="align-center">
+					<h2>오픈카톡방 공유하기</h2>
+					<p>우리 같이 여행해요. </p>
+				</header>
+
+			
+				여행 지역 : <%= @create_country %> <%= @create_city %>
+				<form action="/home/write" method="post">
+					<div class="row uniform">
+						<div class="6u 12u$(xsmall)">
+							<input type="hidden" name="country" value="<%= @create_country %>"/>
+							<input type="hidden" name="image" value="<%= @trip_select %>"/>
+							<input type="text" name="title" id="demo-name" value="" placeholder="오픈카톡방 이름" required/><br>
+							<input type="radio" id="people_1" name="people" value="그룹 대화방" checked>
+							<label for="people_1">그룹 대화방</label>
+							<input type="radio" id="people_n" name="people" value="1:1 대화방">
+							<label for="people_n">1:1 대화방</label>
+						</div>
+						<div class="6u$ 12u$(xsmall)">
+							<input type="text" name="address" id="demo-email" value="" placeholder="오픈카톡방 주소" required/>
+							<p>예) https://open.kkao.com/o/g9vkySp <br>  또는 g9vkySp</p>
+						</div>
+						<div class="12u$">
+							<textarea name="content" id="demo-message" placeholder="태그 ex) #숙소 #축구 #유럽여행예정" rows="1" required></textarea>
+						</div>
+						
+						<div class="6u 12u$(small)">
+							<input type="radio" id="f_country" name="filter" value="0" checked>
+							<label for="f_country">나와 같은 국가의 여행자와 공유</label>
+							<input type="radio" id="f_all" name="filter" value="1">
+							<label for="f_all">모든 지역의 여행자와 공유</label>
+						</div>
+						<!-- Break -->
+						
+						<!-- Break -->
+						<div class="12u$">
+							<ul class="actions">
+								<li><input type="submit" value="오픈카톡 공유하기" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+				<hr/>
+			</div>
+			<div class="media post-item review   ">
+				<div class="media-top post-item-image-wrapper">
+					<div class="post-item-image" style="background-image: url(&quot;http://image.reviewrepublic.net/1-r1YyN0fMg.jpg?w=900&amp;&quot;);">
+						
+					</div>
+				</div>
+		</section>
+		
+		<footer id="footer">
+			<div class="inner">
+				<div class="copyright">
+					&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+				</div>
+
+			</div>
+		</footer>
+</div>

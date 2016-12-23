@@ -1,0 +1,113 @@
+
+<div class="subpage">
+
+	<!-- Header -->
+		<header id="header">
+			<div class="inner">
+				<a href="/home/index" class="logo">Ge<strong>O</strong>talk</a>
+				<nav id="nav">
+					<a href="/home/index">Home</a>
+					<a href="/home/list">글목록</a>
+					<a href="/home/create">글쓰기</a>
+				</nav>
+				<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+			</div>
+		</header>
+
+	<!-- Three -->
+		<section id="three" class="wrapper" style ="background-color: rgb(250, 250, 250);">
+			<div class="inner container" >
+				<header class="align-center">
+					<h2>In <%= @list_country %> </h2>
+					<p>Talk with anonymous users </p>
+					<p><%= @list_country %>, <%= request.location.city %>에서 접속했습니다</p>
+					<a href="/home/list" name="temp" value="1">모두에게 공유된 글 보기</a>
+				</header>
+				<!--검색기능-->
+				<div style="float: left; width: 70%;">
+					<%= form_tag(home_list_path, :method => "get", id: "list_search") do %>
+				  <%= text_field_tag :search, params[:search], placeholder: "ex) 스키장"%>
+				</div>
+				<div style="float: left; width: 30%;">
+				  <%= submit_tag "검색", :name => nil %>
+					<% end %>
+				</div>
+				<div class="col-md-2"></div>
+				<% @every_post.each do |p| %>
+				<div class="col-md-8 col-xs-12" style="margin-top: 10px; margin-bottom: 10px; padding-left: 6px; padding-right: 6px; padding-bottom: 6px; padding-top: 6px; background-color:white; border-radius: 5px; box-shadow: 2px 2px 2px #eee;">
+					<div align="center" style="background-image: url(../assets/<%= p.image %>.jpg); border:1px solid #fafafa; border-radius:5px; margin-bottom: 5px; background-repeat: no-repeat; height:150px; background-position:center; " class="img-rounded">
+						<div align="center middle" style="color :white">
+							<h3 style="white; margin-top=5px;"><strong><%= p.title %></strong></h3><br>
+							<%= p.people %>
+						</div>
+					</div>
+					<div align="right" style="color: #bbb">
+						<!--time_ago-->
+						조회수<% unless p.clicks.present? %>
+										0
+									<% else %>
+										<%= p.clicks %>
+									<% end %>
+						
+						&#183;
+						<%= p.content %> <br>
+						
+						<%= p.country %> &#183;
+						
+						<% if p.created_at > Time.now.beginning_of_day %>
+						  <%="#{time_ago_in_words(p.created_at)} 전"%>
+						<% else %>
+							<%= p.created_at.strftime("%m월 %d일") %>
+						<% end %>
+						&#183;
+						
+						
+							
+								
+									
+									
+									<a href="kakaoopen://join?l=<%= p.address %>&r=EW">
+										<button type="submit" class="btn btn-default like_submit test" id="test" style="border:none; background:none; background-color:none">		
+											<input name="id_of_article_test" type="hidden" id="article_id_test" value="<%= p.id %>">
+											<input name="clicks_of_article_test" type="hidden" id="article_clicks_test" value="<% unless p.clicks.present? %>0<% else %><%= p.clicks %><% end %>">
+											참여하기
+										</button>
+									</a> <!--class="button special"--> 
+					</div>
+				</div><br>
+				<%end%>
+				<div class="col-mid-2"></div>
+			</div>
+			<div align= "center">
+			<%= will_paginate @every_post, inner_window: 3, outer_window: 1 %>
+			</div>
+		</section>
+
+	<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<div class="copyright">
+					&copy; Untitled. Design: <a href="https://templated.co">TEMPLATED</a>. Images: <a href="https://unsplash.com">Unsplash</a>.
+				</div>
+			</div>
+		</footer>
+		
+</div>
+
+<script type="text/javascript">
+
+			$(".test").on("click", function(){
+				
+	      var id = $(this).children("#article_id_test").val()
+	      var clicks = $(this).children("#article_clicks_test").val()
+	      
+	      
+	      
+	        $.ajax({
+	        method: "POST",
+	        url: "/home/count",
+	        data: { count_test: parseInt(clicks) + 1, id: id}
+	      });
+	    });
+
+</script>
