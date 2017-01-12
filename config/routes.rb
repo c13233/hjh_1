@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   get 'home/create1'
   get 'home/list1'
   
-  
-  post 'home/count'
-  post 'home/doit'
+  get 'home/admin'
+  post 'home/admin_access_hjh_9294'
+  post 'home/delete'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

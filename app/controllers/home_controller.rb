@@ -50,4 +50,21 @@ class HomeController < ApplicationController
       
       redirect_to :root
   end
+  def admin
+    
+  end
+  
+  def admin_access_hjh_9294
+    if temp = "ghkdwlwnsgur123"
+    @every_post = Post.all
+    else redirect_to "home/admin"
+    end
+  end
+  
+  def delete
+    delete_post = Post.find(params[:id])
+    delete_post.destroy
+    
+    redirect_to "home/admin_access_hjh_9294"
+  end
 end
